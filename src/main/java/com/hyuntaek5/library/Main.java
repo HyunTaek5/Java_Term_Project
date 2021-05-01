@@ -1,6 +1,5 @@
 package com.hyuntaek5.library;
 
-
 import com.hyuntaek5.library.book.BookInterfaceMethod;
 import com.hyuntaek5.library.user.UserInterfaceMethod;
 
@@ -18,15 +17,10 @@ public class Main {
             if(user.loginMember()==null){
                 do{
                     System.out.print("[1]Login\n[2]SignIn\n[3]Quit\n");
-                    ch2 = sc.nextInt();
-                } while (ch2<1||ch2>3);
-                if(ch2 == 3){
-                    do {
-                        System.out.println("If you want to Quit, Press Q.\n");
-                        ch1 = sc.nextLine();
-                    } while (!ch1.equals("Q"));
-                    break;
-                }
+                    ch1 = sc.next();
+                    ch2 = Integer.parseInt(ch1);
+                } while (ch2<1||ch2>2);
+                if (ch1.equals("Q")) break;
                 switch (ch2){
                     case 1:{
                         user.login();
