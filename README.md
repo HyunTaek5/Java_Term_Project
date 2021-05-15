@@ -7,13 +7,13 @@
 ## Login <hr>
     Two users has been already added automatically when Main.java runs.
 
-###1. Admin
+### 1. Admin
 - ID: admin
 - PassWord: admin1234
 - UserName: Admin
 
 
-###2. CommonUser
+### 2. CommonUser
 - ID: dku_mobile
 - PassWord: dku3220
 - UserName: DKU_MOBILE
