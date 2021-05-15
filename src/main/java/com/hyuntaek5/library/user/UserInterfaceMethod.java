@@ -62,11 +62,11 @@ public class UserInterfaceMethod implements User {
 
     @Override
     public void login() {
-        System.out.println("\nUser Login");
+        System.out.println("User Login");
         String id, pwd;
 
         try{
-            System.out.print("ID:\n");
+            System.out.print("ID:");
             id = br.readLine();
             System.out.println("Password:");
             pwd = br.readLine();
