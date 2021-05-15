@@ -1,4 +1,7 @@
 package com.hyuntaek5.library.user;
+import com.hyuntaek5.library.utilities.SHA256Util;
+
+import java.security.SecureRandom;
 
 public class UserVO {
     private String id;
@@ -22,10 +25,6 @@ public class UserVO {
         this.salt = salt;
     }
 
-    public void setAdminPwd(String pwd){
-        this.pwd = pwd;
-    }
-
     public String getUsername(){
         return username;
     }
@@ -37,4 +36,21 @@ public class UserVO {
     public String getSalt(){
         return salt;
     }
+
+    public String generateSalt() {
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+
+        return Byte_to_String(salt);
+    }
+
+    public String Byte_to_String(byte[] temp) {
+        StringBuilder sb = new StringBuilder();
+        for(byte a : temp) {
+            sb.append(String.format("%02x", a));
+        }
+        return sb.toString();
+    }
+
 }

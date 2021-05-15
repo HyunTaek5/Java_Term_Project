@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public class SHA256Util {
-    public static String getEncrypt(String source, String salt) {
+    public static String getEncryp(String source, String salt) {
         return getEncrypt(source, salt.getBytes());
     }
     public static String getEncrypt(String source, byte[] salt) {
@@ -50,16 +50,17 @@ public class SHA256Util {
         return sb.toString();
     }
 
-    public static String Hashing(byte[] password, String Salt) throws Exception {
 
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-        for(int i = 0; i < 10000; i++) {
-            String temp = Byte_to_String(password) + Salt;
-            md.update(temp.getBytes());
-            password = md.digest();
-        }
-
-        return Byte_to_String(password);
-    }
+//    public static String Hashing(byte[] password, String Salt) throws Exception {
+//
+//        MessageDigest md = MessageDigest.getInstance("SHA-256");
+//
+//        for(int i = 0; i < 10000; i++) {
+//            String temp = Byte_to_String(password) + Salt;
+//            md.update(temp.getBytes());
+//            password = md.digest();
+//        }
+//
+//        return Byte_to_String(password);
+//    }
 }

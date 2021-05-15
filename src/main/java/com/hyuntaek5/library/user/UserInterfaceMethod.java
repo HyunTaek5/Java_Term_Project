@@ -1,6 +1,5 @@
 package com.hyuntaek5.library.user;
 
-import com.hyuntaek5.library.user.User;
 import com.hyuntaek5.library.utilities.SHA256Util;
 
 import java.io.BufferedReader;
@@ -15,10 +14,22 @@ public class UserInterfaceMethod implements User {
     private UserVO uservo;
 
     public UserInterfaceMethod() {
+        UserVO ad = new UserVO();
+        ad.setId("admin");
+        String pwd = "admin1234";
+        String salt = SHA256Util.generateSalt();
+        String encryptPwd = SHA256Util.getEncryp(pwd, salt);
+        ad.setPwd(encryptPwd, salt);
+        ad.setUsername("Admin");
+        list.add(ad);
+
         UserVO us = new UserVO();
-        us.setId("admin");
-        us.setAdminPwd("admin1234");
-        us.setUsername("관리자");
+        us.setId("dku_mobile");
+        String us_pwd = "dku3220";
+        String us_salt = SHA256Util.generateSalt();
+        String us_encryptPwd = SHA256Util.getEncryp(us_pwd, us_salt);
+        us.setPwd(us_encryptPwd, us_salt);
+        us.setUsername("DKU_MOBILE");
         list.add(us);
     }
     @Override
@@ -36,14 +47,14 @@ public class UserInterfaceMethod implements User {
             System.out.print("Password:");
             String pwd = br.readLine();
             String salt = SHA256Util.generateSalt();
-            String encrypPwd = SHA256Util.getEncrypt(pwd, salt);
-            us.setPwd(encrypPwd, salt);
+            String encryptPwd = SHA256Util.getEncryp(pwd, salt);
+            us.setPwd(encryptPwd, salt);
 
             System.out.print("UserName:");
             us.setUsername(br.readLine());
 
             list.add(us);
-            System.out.println("Thank you for sign in. Please Login.");
+            System.out.println("Thank "+ us.getUsername()+" for sign in. Please Login.");
         } catch (IOException e){
             System.out.println(e.toString());
         }
@@ -57,15 +68,18 @@ public class UserInterfaceMethod implements User {
         try{
             System.out.print("ID:\n");
             id = br.readLine();
-
             System.out.println("Password:");
             pwd = br.readLine();
             UserVO us = readUser(id);
             if(us!=null){
                 String salt = us.getSalt();
-                String temp_pwd = SHA256Util.Hashing(pwd.getBytes(),salt);
+                String temp_pwd = SHA256Util.getEncryp(pwd, salt);
                 if(us.getPwd().equals(temp_pwd)){
                      uservo = us;
+                     System.out.println("Logged In!");
+                     if (us.getUsername().equals("Admin")) {
+                         System.out.println("Welcome to AdminPage.");
+                     }
                 } else {
                     System.out.println("Invalid Password!");
                 }
@@ -89,7 +103,7 @@ public class UserInterfaceMethod implements User {
     public void userDelete(){
         UserVO us1 = readUser(uservo.getId());
         try{
-            if(!uservo.getId().equals("admin")){
+            if(!us1.getId().equals("admin")){
                 System.out.println("\nDelete User");
 
                 System.out.println("Rewrite the password");
@@ -115,7 +129,7 @@ public class UserInterfaceMethod implements User {
                     list.remove(us1);
                     System.out.println("Complete to delete User.");
                 } else {
-                    System.out.println("Canacel deleting User.");
+                    System.out.println("Cancel deleting User.");
                 }
             }
         } catch (IOException e){

@@ -22,22 +22,20 @@ public class BookInterfaceMethod implements Book {
             System.out.println("Write a book title to borrow:");
             Title = br.readLine();
 
-            Iterator<String> it = map.keySet().iterator();
-            while (it.hasNext()) {
-                String num = it.next();
+            for (String num : map.keySet()) {
                 BookVO book = map.get(num);
 
-                if(book.getTitle().startsWith(Title)){
-                    if(!book.isAvailable()){
+                if (book.getTitle().startsWith(Title)) {
+                    if (!book.isAvailable()) {
                         System.out.println("Already borrowed.");
                         break;
                     }
-                    book.setStock(book.getStock()-1);
-                    System.out.print(num+"\t");
+                    book.setStock(book.getStock() - 1);
+                    System.out.print(num + "\t");
                     System.out.println("====Borrowed Completed====");
-                    System.out.print("|   "+book.getTitle()+"   |\n");
-                    System.out.print("|   "+book.getAuthor()+"   |\n");
-                    System.out.print("|   "+book.getStock()+"   |\n");
+                    System.out.print(book.getTitle() + "\n");
+                    System.out.print(book.getAuthor() + "\n");
+                    System.out.print(book.getStock() + "\n");
                     System.out.print("==========================");
                     book.setAvailable(false);
                 }
@@ -56,7 +54,7 @@ public class BookInterfaceMethod implements Book {
 
             if (s.equals(value.getTitle())) {
                 if (value.isAvailable()) {
-                    System.out.println("Currently Avaliable.");
+                    System.out.println("Currently Available.");
                 } else if (!value.isAvailable()) {
                     System.out.println("Successfully Backed");
                     value.setStock(value.getStock() + 1);
@@ -76,7 +74,7 @@ public class BookInterfaceMethod implements Book {
 
     @Override
     public void addBook(){
-        System.out.println("\nAdd com.hyuntaek5.library.book.Book...");
+        System.out.println("\nAdd Book");
 
         try{
             String code;
@@ -85,7 +83,7 @@ public class BookInterfaceMethod implements Book {
             System.out.println("Code:");
             code = br.readLine();
 
-            System.out.println("com.hyuntaek5.library.book.Book Name:");
+            System.out.println("Book Name:");
             vo.setTitle(br.readLine());
 
             System.out.println("Author Name:");
@@ -94,7 +92,7 @@ public class BookInterfaceMethod implements Book {
             vo.setStock(vo.getStock()+1);
 
             map.put(code, vo);
-            System.out.println("com.hyuntaek5.library.book.Book has been added");
+            System.out.println("Book has been added");
 
         } catch (IOException e){
             System.out.println(e.toString());
@@ -103,7 +101,7 @@ public class BookInterfaceMethod implements Book {
 
     @Override
     public void deleteBook(){
-        System.out.println("Write a book tilte to delete");
+        System.out.println("Write a book title to delete");
 
         String s = scan.next();
 
